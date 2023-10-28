@@ -12,14 +12,18 @@
 		return { arg1: makeArg(), arg2: makeArg() };
 	}
 
+	let wantedAnswer: number = 0;
+
 	function resetTerms(args: Args) {
 		const el1 = document.getElementById('arg1') as HTMLDivElement;
 		const el2 = document.getElementById('arg2') as HTMLDivElement;
 		const ans = document.getElementById('ans') as HTMLTextAreaElement;
 		el1.innerHTML = args.arg1.toString();
 		el2.innerHTML = args.arg2.toString();
-		const sum = args.arg1 + args.arg2;
+		wantedAnswer = args.arg1 + args.arg2;
 		ans.value = '';
+		ans.placeholder = '?';
+		ans.focus();
 		// rhs.innerHTML = sum.toString();
 	}
 
@@ -31,6 +35,26 @@
 		resetTerms(newargs());
 	}
 
+	function correctResponse() {
+		alert('Right!');
+	}
+
+	function wrongReponse() {
+		alert('Wrong!');
+	}
+
+	function chkAns() {
+		const ans = document.getElementById('ans') as HTMLTextAreaElement;
+		if (ans) {
+			const userAnswer = parseInt(ans.value);
+			if (userAnswer === wantedAnswer) {
+				correctResponse();
+			} else {
+				wrongReponse();
+			}
+		}
+	}
+
 	// your script goes here
 </script>
 
@@ -39,12 +63,11 @@
 	<span class="op">+</span>
 	<div id="arg2" class="term2">7</div>
 	<span class="eq">=</span>
-	<!-- <div id="rhs" class="rhs"> -->
 	<textarea id="ans" cols="4" rows="1" placeholder="?" />
 	<!-- </div> -->
 </div>
 <div class="buttonbar">
-	<button id="chkans" class="barbtn">Check Answer</button>
+	<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
 	<button class="barbtn" on:click={hdlClick}>Next Problem</button>
 </div>
 
@@ -71,14 +94,6 @@
 
 	.term2 {
 		color: red;
-	}
-
-	.rhs {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		color: green;
-		border: 1px solid red;
 	}
 
 	textarea {
