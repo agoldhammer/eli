@@ -2,11 +2,14 @@
 <slot><!-- optional fallback --></slot>
 
 <style>
+	:global(body) {
+		--clr-btn: #0083ff;
+	}
 	.header {
 		width: 50%;
 		border: 1px solid black;
 		margin: auto;
 		text-align: center;
-		color: rgb(255, 0, 132);
+		color: var(--clr-btn);
 	}
 </style>

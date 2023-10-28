@@ -83,7 +83,7 @@
 
 	.next {
 		line-height: 2;
-		color: blue;
+		color: var(--clr-btn);
 		border: 1px solid blue;
 		border-radius: 8px;
 	}
