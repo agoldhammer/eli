@@ -15,11 +15,12 @@
 	function resetTerms(args: Args) {
 		const el1 = document.getElementById('arg1') as HTMLDivElement;
 		const el2 = document.getElementById('arg2') as HTMLDivElement;
-		const rhs = document.getElementById('rhs') as HTMLDivElement;
+		const ans = document.getElementById('ans') as HTMLTextAreaElement;
 		el1.innerHTML = args.arg1.toString();
 		el2.innerHTML = args.arg2.toString();
 		const sum = args.arg1 + args.arg2;
-		rhs.innerHTML = sum.toString();
+		ans.value = '';
+		// rhs.innerHTML = sum.toString();
 	}
 
 	onMount(() => {
@@ -38,10 +39,13 @@
 	<span class="op">+</span>
 	<div id="arg2" class="term2">7</div>
 	<span class="eq">=</span>
-	<div id="rhs" class="rhs">12</div>
+	<!-- <div id="rhs" class="rhs"> -->
+	<textarea id="ans" cols="4" rows="1" placeholder="?" />
+	<!-- </div> -->
 </div>
 <div class="buttonbar">
-	<button class="next" on:click={hdlClick}>Next Problem</button>
+	<button id="chkans" class="barbtn">Check Answer</button>
+	<button class="barbtn" on:click={hdlClick}>Next Problem</button>
 </div>
 
 <style>
@@ -50,9 +54,11 @@
 		margin: auto;
 		display: flex;
 		flex-direction: row;
+		align-content: center;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
 		font-size: 5em;
+		border: 2px solid green;
 	}
 
 	.problem * {
@@ -68,7 +74,18 @@
 	}
 
 	.rhs {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		color: green;
+		border: 1px solid red;
+	}
+
+	textarea {
+		color: green;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
+			sans-serif;
+		font-size: 1em;
 	}
 
 	span {
@@ -79,9 +96,10 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
+		gap: 1em;
 	}
 
-	.next {
+	.barbtn {
 		line-height: 2;
 		color: var(--clr-btn);
 		border: 1px solid blue;
