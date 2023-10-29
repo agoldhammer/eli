@@ -107,17 +107,17 @@
 
 <style>
 	.problem {
-		width: 75%;
+		width: 60%;
 		margin: auto;
 		display: flex;
 		flex-direction: row;
-		align-content: center;
+		justify-content: center;
 
-		font-size: 5em;
-		/* border: 2px solid green; */
+		font-size: var(--fs-2);
 	}
 
 	.problem * {
+		font-size: var(--fs-2);
 		margin: 1ch;
 	}
 
@@ -129,18 +129,20 @@
 		width: 50%;
 		margin: auto;
 		padding-top: 1ch;
-		font-size: 2em;
+		font-size: var(--fs-1);
 		color: orange;
 	}
 
 	.score #correct {
-		border: 1px solid black;
+		border: 1px solid yellow;
+		border-radius: 8px;
 		color: green;
 		background-color: lightgoldenrodyellow;
 	}
 
 	.score #wrong {
-		border: 1px solid black;
+		border: 1px solid yellow;
+		border-radius: 8px;
 		color: red;
 		background-color: lightgoldenrodyellow;
 	}
@@ -157,7 +159,7 @@
 		color: green;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
-		font-size: 1em;
+		font-size: var(--fs-2);
 		min-width: 3ch;
 		/* resize: none; */
 	}

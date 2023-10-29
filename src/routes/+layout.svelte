@@ -4,6 +4,9 @@
 <style>
 	:global(body) {
 		--clr-btn: #0083ff;
+		--fs-0: 2vw;
+		--fs-1: 3vw;
+		--fs-2: 4vw;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
 	}
@@ -12,7 +15,7 @@
 		/* border: 1px solid black; */
 		margin: auto;
 		text-align: center;
-		font-size: 1.5em;
+		font-size: var(--fs-0);
 		color: var(--clr-btn);
 	}
 </style>
