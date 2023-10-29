@@ -9,6 +9,7 @@
 		--fs-2: 4vw;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
+		background-color: rgb(189, 194, 198);
 	}
 	.header {
 		width: 50%;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { writable } from 'svelte/store';
 	import Result from '$lib/Result.svelte';
 
 	type Args = { arg1: number; arg2: number };
@@ -9,11 +10,11 @@
 	let resultCorrect = false;
 	let nCorrect = 0;
 	let nWrong = 0;
-	let MAXARG = 10; // maximum argument is set by level controls
+	let MAXARG = writable(10); // maximum argument is set by level controls
 
 	// make argument in range 0 to 20
 	function makeArg() {
-		return Math.round(MAXARG * Math.random());
+		return Math.round($MAXARG * Math.random());
 	}
 
 	function newargs() {
@@ -77,6 +78,8 @@
 
 	function newProblem(node: HTMLDivElement) {
 		resetWithNewArgs();
+		setCheckedBtn();
+		document.getElementById('ans')?.focus();
 	}
 
 	function chkEnter(event: KeyboardEvent) {
@@ -84,15 +87,58 @@
 			chkAns();
 		}
 	}
+
+	// ensure that correct level button is set with each new problem
+	function setCheckedBtn() {
+		const level = $MAXARG;
+		let id: string = '';
+		switch (level) {
+			case 10:
+				id = 'easy';
+				break;
+			case 15:
+				id = 'medium';
+				break;
+			case 25:
+				id = 'hard';
+				break;
+		}
+		console.log('set checked btn id', id);
+		const btn = document.getElementById(id) as HTMLInputElement;
+		btn.checked = true;
+	}
+
+	function setLevel(event: MouseEvent) {
+		let target = event.target as HTMLInputElement;
+		if (target) {
+			switch (target.id) {
+				case 'easy':
+					MAXARG.set(10);
+					break;
+				case 'medium':
+					MAXARG.set(15);
+					break;
+				case 'hard':
+					MAXARG.set(25);
+					break;
+			}
+			console.log('MAXARG', $MAXARG);
+		}
+	}
 </script>
 
 {#if showResult}
 	<Result bind:showResult bind:resultCorrect />
 {:else}
-	<div class="levelbar">
-		<button id="10" class="levelbtn">Easy</button>
-		<button id="15" class="levelbtn">Medium</button>
-		<button id="25" class="levelbtn">Hard</button>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+	<div class="levelbar" role="group" on:click={setLevel}>
+		<label for="easy">Easy</label>
+		<input type="radio" name="levelset" id="easy" class="levelbtn" />
+		<label for="medium">Medium</label>
+		<input type="radio" name="levelset" id="medium" class="levelbtn" />
+		<label for="hard">Hard</label>
+		<input type="radio" name="levelset" id="hard" class="levelbtn" />
 	</div>
 	<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
 		<span id="correct">Right: {nCorrect.toString()}</span>
@@ -119,6 +165,10 @@
 		flex-direction: row;
 		justify-content: center;
 		gap: 1em;
+	}
+
+	label {
+		color: var(--clr-btn);
 	}
 
 	.levelbtn {
