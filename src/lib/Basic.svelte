@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import Result from '$lib/Result.svelte';
 
 	type Args = { arg1: number; arg2: number };
+
+	let showResult = false;
+	let resultCorrect = false;
+	let nCorrect = 0;
+	let nWrong = 0;
 
 	// make argument in range 0 to 20
 	function makeArg() {
@@ -21,32 +28,44 @@
 		el1.innerHTML = args.arg1.toString();
 		el2.innerHTML = args.arg2.toString();
 		wantedAnswer = args.arg1 + args.arg2;
+		// console.log('args, ans', args.arg1, args.arg2, wantedAnswer);
 		ans.value = '';
 		ans.placeholder = '?';
 		ans.focus();
 		// rhs.innerHTML = sum.toString();
 	}
 
-	onMount(() => {
-		resetTerms(newargs());
-	});
+	function resetWithNewArgs() {
+		// console.log('reset w new args called');
 
-	function hdlClick() {
 		resetTerms(newargs());
 	}
 
+	onMount(() => {
+		resetWithNewArgs();
+	});
+
 	function correctResponse() {
-		alert('Right!');
+		// console.log('called correctResponse');
+		nCorrect += 1;
+		resultCorrect = true;
+		showResult = true;
+		resetWithNewArgs();
 	}
 
 	function wrongReponse() {
-		alert('Wrong!');
+		// console.log('called wrongResponse');
+		nWrong += 1;
+		resultCorrect = false;
+		showResult = true;
+		resetWithNewArgs();
 	}
 
 	function chkAns() {
 		const ans = document.getElementById('ans') as HTMLTextAreaElement;
 		if (ans) {
 			const userAnswer = parseInt(ans.value);
+			// console.log('chkans wanted, user', wantedAnswer, userAnswer);
 			if (userAnswer === wantedAnswer) {
 				correctResponse();
 			} else {
@@ -55,21 +74,36 @@
 		}
 	}
 
-	// your script goes here
+	function newProblem(node: HTMLDivElement) {
+		resetWithNewArgs();
+	}
+
+	function chkEnter(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			chkAns();
+		}
+	}
 </script>
 
-<div class="problem">
-	<div id="arg1" class="term1">5</div>
-	<span class="op">+</span>
-	<div id="arg2" class="term2">7</div>
-	<span class="eq">=</span>
-	<textarea id="ans" cols="4" rows="1" placeholder="?" />
-	<!-- </div> -->
-</div>
-<div class="buttonbar">
-	<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
-	<button class="barbtn" on:click={hdlClick}>Next Problem</button>
-</div>
+{#if showResult}
+	<Result bind:showResult bind:resultCorrect />
+{:else}
+	<div class="score">
+		<span id="correct">Right: {nCorrect.toString()}</span>
+		<span id="wrong">Wrong: {nWrong.toString()}</span>
+	</div>
+	<div class="problem" use:newProblem in:fade|global={{ delay: 200, duration: 1500 }}>
+		<span id="arg1" class="term1">0</span>
+		<span class="op">+</span>
+		<span id="arg2" class="term2">0</span>
+		<span class="eq">=</span>
+		<!-- svelte-ignore a11y-autofocus -->
+		<textarea id="ans" cols="4" rows="1" placeholder="?" autofocus on:keypress={chkEnter} />
+	</div>
+	<div class="buttonbar">
+		<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
+	</div>
+{/if}
 
 <style>
 	.problem {
@@ -78,14 +112,37 @@
 		display: flex;
 		flex-direction: row;
 		align-content: center;
-		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
-			sans-serif;
+
 		font-size: 5em;
-		border: 2px solid green;
+		/* border: 2px solid green; */
 	}
 
 	.problem * {
 		margin: 1ch;
+	}
+
+	.score {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 1em;
+		width: 50%;
+		margin: auto;
+		padding-top: 1ch;
+		font-size: 2em;
+		color: orange;
+	}
+
+	.score #correct {
+		border: 1px solid black;
+		color: green;
+		background-color: lightgoldenrodyellow;
+	}
+
+	.score #wrong {
+		border: 1px solid black;
+		color: red;
+		background-color: lightgoldenrodyellow;
 	}
 
 	.term1 {
@@ -101,10 +158,8 @@
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
 		font-size: 1em;
-	}
-
-	span {
-		color: black;
+		min-width: 3ch;
+		/* resize: none; */
 	}
 
 	.buttonbar {
