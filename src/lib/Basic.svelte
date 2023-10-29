@@ -9,10 +9,11 @@
 	let resultCorrect = false;
 	let nCorrect = 0;
 	let nWrong = 0;
+	let MAXARG = 10; // maximum argument is set by level controls
 
 	// make argument in range 0 to 20
 	function makeArg() {
-		return Math.round(20 * Math.random());
+		return Math.round(MAXARG * Math.random());
 	}
 
 	function newargs() {
@@ -88,7 +89,12 @@
 {#if showResult}
 	<Result bind:showResult bind:resultCorrect />
 {:else}
-	<div class="score">
+	<div class="levelbar">
+		<button id="10" class="levelbtn">Easy</button>
+		<button id="15" class="levelbtn">Medium</button>
+		<button id="25" class="levelbtn">Hard</button>
+	</div>
+	<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
 		<span id="correct">Right: {nCorrect.toString()}</span>
 		<span id="wrong">Wrong: {nWrong.toString()}</span>
 	</div>
@@ -106,6 +112,22 @@
 {/if}
 
 <style>
+	.levelbar {
+		width: 60%;
+		margin: auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 1em;
+	}
+
+	.levelbtn {
+		border-radius: 8px;
+		font-size: var(--f2-1);
+		color: orange;
+		background-color: lightcyan;
+	}
+
 	.problem {
 		width: 60%;
 		margin: auto;
