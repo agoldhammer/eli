@@ -13,6 +13,8 @@
 	.header {
 		width: 50%;
 		/* border: 1px solid black; */
+		padding-top: 40px;
+		padding-bottom: 20px;
 		margin: auto;
 		text-align: center;
 		font-size: var(--fs-0);

@@ -17,8 +17,10 @@
 		<span id="youare">You are</span>
 		{#if resultCorrect}
 			<div id="right" in:fade|global={{ delay: 250, duration: 1300 }}>RIGHT!</div>
+			<audio src="/correct.wav" autoplay />
 		{:else}
-			<div id="wrong" in:blur|global={{ delay: 250, duration: 2300 }}>WRONG!</div>
+			<div id="wrong" in:blur|global={{ delay: 250, duration: 1300 }}>WRONG!</div>
+			<audio src="/error.wav" autoplay />
 		{/if}
 	</div>
 {/if}
