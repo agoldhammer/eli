@@ -31,9 +31,7 @@
 		flex-direction: row;
 		justify-content: center;
 		padding-top: 1ch;
-		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
-			sans-serif;
-		font-size: 5em;
+		font-size: var(--fs-2);
 		/* border: 2px solid green; */
 		gap: 1ch;
 	}
