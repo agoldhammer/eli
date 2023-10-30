@@ -121,6 +121,7 @@
 					MAXARG.set(25);
 					break;
 			}
+			// newProblem(null);
 			// console.log('MAXARG', $MAXARG);
 		}
 	}
