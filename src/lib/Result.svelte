@@ -8,7 +8,7 @@
 		// console.log('resultCorrect', resultCorrect);
 		setTimeout(() => {
 			showResult = false;
-		}, 1500);
+		}, 1700);
 	});
 </script>
 
@@ -20,7 +20,7 @@
 			<audio src="/correct.wav" autoplay />
 		{:else}
 			<div id="wrong" in:blur|global={{ delay: 250, duration: 1300 }}>WRONG!</div>
-			<audio src="/error.wav" autoplay />
+			<audio src="/PapaMath_MBTA_incorrect.mp3" autoplay />
 		{/if}
 	</div>
 {/if}
@@ -28,13 +28,13 @@
 <style>
 	#result {
 		width: 75%;
+		height: 100vh;
 		margin: auto;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		padding-top: 1ch;
 		font-size: var(--fs-2);
-		/* border: 2px solid green; */
 		gap: 1ch;
 	}
 	#youare {

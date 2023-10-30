@@ -10,6 +10,7 @@
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
 		background-color: rgb(189, 194, 198);
+		/* background-image: linear-gradient(to right, rgb(189, 194, 198), white); */
 	}
 	.header {
 		width: 50%;
