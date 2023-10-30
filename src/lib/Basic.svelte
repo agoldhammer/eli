@@ -155,9 +155,9 @@
 		<div class="buttonbar">
 			<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
 		</div>
-		<!-- <div id="tgv">
+		<div id="tgv">
 			<img src="/tgv.jpg" alt="TGV" />
-		</div> -->
+		</div>
 	{/if}
 </div>
 
@@ -260,7 +260,7 @@
 		border-radius: 8px;
 	}
 
-	/* #tgv {
+	#tgv {
 		padding-top: 1em;
 		max-width: 50dvw;
 		max-height: 50dvw;
@@ -273,5 +273,5 @@
 		height: 100%;
 		object-fit: cover;
 		overflow: hidden;
-	} */
+	}
 </style>
