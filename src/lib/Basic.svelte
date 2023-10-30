@@ -156,7 +156,7 @@
 			<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
 		</div>
 		<div id="tgv">
-			<!-- <img src="/tgv.jpg" alt="TGV" /> -->
+			<img src="/tgv.jpg" alt="TGV" />
 		</div>
 	{/if}
 </div>
@@ -268,5 +268,12 @@
 		/* height: 50%; */
 		margin: auto;
 		text-align: center;
+	}
+
+	#tgv img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		overflow: hidden;
 	}
 </style>
