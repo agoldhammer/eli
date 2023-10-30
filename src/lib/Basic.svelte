@@ -163,7 +163,7 @@
 
 <style>
 	.container {
-		background-image: linear-gradient(to bottom right, lightsalmon, white);
+		background-image: linear-gradient(to bottom right, #e7e3d7, white);
 	}
 
 	.levelbar {

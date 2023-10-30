@@ -9,7 +9,7 @@
 		--fs-2: 4vw;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
-		background-color: rgb(189, 194, 198);
+		background-color: #e7e3d7;
 		/* background-image: linear-gradient(to right, rgb(189, 194, 198), white); */
 	}
 	.header {
@@ -19,7 +19,7 @@
 		padding-bottom: 20px;
 		margin: auto;
 		text-align: center;
-		font-size: var(--fs-0);
+		font-size: var(--fs-1);
 		color: var(--clr-btn);
 	}
 </style>
