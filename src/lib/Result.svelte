@@ -17,7 +17,7 @@
 		<span id="youare">You are</span>
 		{#if resultCorrect}
 			<div id="right" in:fade|global={{ delay: 250, duration: 1300 }}>RIGHT!</div>
-			<audio src="/correct.wav" autoplay />
+			<audio src="/PapaMath_MBTA_correct_ding.mp3" autoplay />
 		{:else}
 			<div id="wrong" in:blur|global={{ delay: 250, duration: 1300 }}>WRONG!</div>
 			<audio src="/PapaMath_MBTA_incorrect.mp3" autoplay />
