@@ -75,7 +75,7 @@
 		}
 	}
 
-	function newProblem(node: HTMLDivElement) {
+	function newProblem(node: HTMLDivElement | null) {
 		resetWithNewArgs();
 		setCheckedBtn();
 		document.getElementById('ans')?.focus();
@@ -121,46 +121,48 @@
 					MAXARG.set(25);
 					break;
 			}
-			// newProblem(null);
+			newProblem(null);
 			// console.log('MAXARG', $MAXARG);
 		}
 	}
 </script>
 
-<div class="container">
-	{#if showResult}
-		<Result bind:showResult bind:resultCorrect />
-	{:else}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<div class="levelbar" role="group" on:click={setLevel}>
-			<label for="easy">Easy</label>
-			<input type="radio" name="levelset" id="easy" class="levelbtn" />
-			<label for="medium">Medium</label>
-			<input type="radio" name="levelset" id="medium" class="levelbtn" />
-			<label for="hard">Hard</label>
-			<input type="radio" name="levelset" id="hard" class="levelbtn" />
-		</div>
-		<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
-			<span id="correct">Right: {nCorrect.toString()}</span>
-			<span id="wrong">Wrong: {nWrong.toString()}</span>
-		</div>
-		<div class="problem" use:newProblem in:fade|global={{ delay: 200, duration: 1500 }}>
-			<span id="arg1" class="term1">0</span>
-			<span class="op">+</span>
-			<span id="arg2" class="term2">0</span>
-			<span class="eq">=</span>
-			<!-- svelte-ignore a11y-autofocus -->
-			<textarea id="ans" cols="4" rows="1" placeholder="?" autofocus on:keypress={chkEnter} />
-		</div>
-		<div class="buttonbar">
-			<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
-		</div>
-		<div id="tgv">
-			<img src="/tgv.jpg" alt="TGV" />
-		</div>
-	{/if}
-</div>
+{#key $MAXARG}
+	<div class="container">
+		{#if showResult}
+			<Result bind:showResult bind:resultCorrect />
+		{:else}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+			<div class="levelbar" role="group" on:click={setLevel}>
+				<label for="easy">Easy</label>
+				<input type="radio" name="levelset" id="easy" class="levelbtn" />
+				<label for="medium">Medium</label>
+				<input type="radio" name="levelset" id="medium" class="levelbtn" />
+				<label for="hard">Hard</label>
+				<input type="radio" name="levelset" id="hard" class="levelbtn" />
+			</div>
+			<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
+				<span id="correct">Right: {nCorrect.toString()}</span>
+				<span id="wrong">Wrong: {nWrong.toString()}</span>
+			</div>
+			<div class="problem" use:newProblem in:fade|global={{ delay: 200, duration: 1500 }}>
+				<span id="arg1" class="term1">0</span>
+				<span class="op">+</span>
+				<span id="arg2" class="term2">0</span>
+				<span class="eq">=</span>
+				<!-- svelte-ignore a11y-autofocus -->
+				<textarea id="ans" cols="4" rows="1" placeholder="?" autofocus on:keypress={chkEnter} />
+			</div>
+			<div class="buttonbar">
+				<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
+			</div>
+			<div id="tgv">
+				<img src="/tgv.jpg" alt="TGV" />
+			</div>
+		{/if}
+	</div>
+{/key}
 
 <style>
 	.container {
