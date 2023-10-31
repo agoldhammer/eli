@@ -127,25 +127,27 @@
 	}
 </script>
 
-{#key $MAXARG}
-	<div class="container">
-		{#if showResult}
-			<Result bind:showResult bind:resultCorrect />
-		{:else}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-			<div class="levelbar" role="group" on:click={setLevel}>
-				<label for="easy">Easy</label>
-				<input type="radio" name="levelset" id="easy" class="levelbtn" />
-				<label for="medium">Medium</label>
-				<input type="radio" name="levelset" id="medium" class="levelbtn" />
-				<label for="hard">Hard</label>
-				<input type="radio" name="levelset" id="hard" class="levelbtn" />
-			</div>
-			<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
-				<span id="correct">Right: {nCorrect.toString()}</span>
-				<span id="wrong">Wrong: {nWrong.toString()}</span>
-			</div>
+<div class="container">
+	{#if showResult}
+		<Result bind:showResult bind:resultCorrect />
+	{:else}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+		<div class="levelbar" role="group" on:click={setLevel}>
+			<label for="easy">Easy</label>
+			<input type="radio" name="levelset" id="easy" class="levelbtn" />
+			<label for="medium">Medium</label>
+			<input type="radio" name="levelset" id="medium" class="levelbtn" />
+			<label for="hard">Hard</label>
+			<input type="radio" name="levelset" id="hard" class="levelbtn" />
+		</div>
+		<!--  -->
+		<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
+			<span id="correct">Right: {nCorrect.toString()}</span>
+			<span id="wrong">Wrong: {nWrong.toString()}</span>
+		</div>
+		<!--  -->
+		{#key $MAXARG}
 			<div class="problem" use:newProblem in:fade|global={{ delay: 200, duration: 1500 }}>
 				<span id="arg1" class="term1">0</span>
 				<span class="op">+</span>
@@ -154,19 +156,22 @@
 				<!-- svelte-ignore a11y-autofocus -->
 				<textarea id="ans" cols="4" rows="1" placeholder="?" autofocus on:keypress={chkEnter} />
 			</div>
-			<div class="buttonbar">
-				<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
-			</div>
-			<div id="tgv">
-				<img src="/tgv.jpg" alt="TGV" />
-			</div>
-		{/if}
-	</div>
-{/key}
+		{/key}
+
+		<div class="buttonbar">
+			<button id="chkans" class="barbtn" on:click={chkAns}>Check Answer</button>
+		</div>
+		<div id="tgv">
+			<img src="/tgv.jpg" alt="TGV" />
+		</div>
+	{/if}
+</div>
 
 <style>
 	.container {
-		background-image: linear-gradient(to bottom right, #e7e3d7, white);
+		height: 100%;
+		/* background-image: linear-gradient(to right, #e7e3d7, rgb(247, 236, 236)); */
+		background-color: rgb(225, 222, 238, 0.5);
 	}
 
 	.levelbar {
@@ -263,11 +268,17 @@
 		border-radius: 8px;
 	}
 
+	.barbtn:hover {
+		background-color: green;
+		transform: scale(1.2);
+	}
+
 	#tgv {
 		padding-top: 1em;
 		max-width: 50dvw;
 		max-height: 50dvw;
 		margin: auto;
+		padding-bottom: 2em;
 		text-align: center;
 	}
 
