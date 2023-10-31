@@ -169,7 +169,7 @@
 
 <style>
 	.container {
-		height: 100%;
+		min-height: 100vh;
 		/* background-image: linear-gradient(to right, #e7e3d7, rgb(247, 236, 236)); */
 		background-color: rgb(225, 222, 238, 0.5);
 	}
