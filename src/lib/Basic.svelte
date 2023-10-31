@@ -201,6 +201,8 @@
 		line-height: 1em;
 		margin: 1em auto;
 		display: flex;
+		border-top: 1px solid black;
+		padding-top: 1rem;
 		gap: 1em;
 		flex-direction: row;
 		justify-content: center;
