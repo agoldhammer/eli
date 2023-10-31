@@ -7,6 +7,7 @@
 		--fs-0: 2vw;
 		--fs-1: 3vw;
 		--fs-2: 4vw;
+		--fs-3: 5vw;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
 		background-color: #e7e3d7;

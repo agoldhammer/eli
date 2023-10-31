@@ -177,6 +177,7 @@
 	.levelbar {
 		width: 60%;
 		margin: auto;
+		font-size: var(--fs-0);
 		padding: 1em 0em;
 		display: flex;
 		flex-direction: row;
@@ -190,23 +191,20 @@
 
 	.levelbtn {
 		border-radius: 8px;
-		font-size: var(--fs-1);
+		/* font-size: var(--fs-1); */
 		color: orange;
 		background-color: lightcyan;
 	}
 
 	.problem {
 		width: 60%;
-		margin: auto;
+		line-height: 1em;
+		margin: 1em auto;
 		display: flex;
+		gap: 1em;
 		flex-direction: row;
 		justify-content: center;
-		font-size: var(--fs-2);
-	}
-
-	.problem * {
-		font-size: var(--fs-2);
-		margin: 1em;
+		font-size: var(--fs-3);
 	}
 
 	.score {
@@ -245,10 +243,11 @@
 
 	textarea {
 		color: green;
-		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
-			sans-serif;
+		/* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, */
+		/* sans-serif; */
 		font-size: var(--fs-2);
 		min-width: 3ch;
+		padding: 0px 0px;
 		/* resize: none; */
 	}
 
