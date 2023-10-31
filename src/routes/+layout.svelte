@@ -1,4 +1,4 @@
-<div class="header">Papa's Math Practice for Eli</div>
+<h1 class="header">Eli's Math Practice</h1>
 <slot><!-- optional fallback --></slot>
 
 <style>
@@ -13,13 +13,13 @@
 		/* background-image: linear-gradient(to right, rgb(189, 194, 198), white); */
 	}
 	.header {
-		width: 50%;
+		/* width: 80%; */
 		/* border: 1px solid black; */
-		padding-top: 40px;
+		padding-top: 20px;
 		padding-bottom: 20px;
 		margin: auto;
 		text-align: center;
-		font-size: var(--fs-1);
+		/* font-size: var(--fs-2); */
 		color: var(--clr-btn);
 	}
 </style>

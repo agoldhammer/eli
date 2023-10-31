@@ -177,7 +177,7 @@
 	.levelbar {
 		width: 60%;
 		margin: auto;
-		padding-top: 1em;
+		padding: 1em 0em;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
@@ -201,13 +201,12 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-
 		font-size: var(--fs-2);
 	}
 
 	.problem * {
 		font-size: var(--fs-2);
-		margin: 1ch;
+		margin: 1em;
 	}
 
 	.score {
@@ -217,7 +216,7 @@
 		gap: 1em;
 		width: 50%;
 		margin: auto;
-		padding-top: 1ch;
+		padding: 1em 0em;
 		font-size: var(--fs-1);
 		color: orange;
 	}
@@ -258,6 +257,7 @@
 		flex-direction: row;
 		justify-content: center;
 		gap: 1em;
+		padding: 20px 0px;
 	}
 
 	.barbtn {
