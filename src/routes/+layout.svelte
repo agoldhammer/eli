@@ -16,7 +16,6 @@
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
 			sans-serif;
 		background-color: #e7e3d7;
-		/* background-image: linear-gradient(to right, rgb(189, 194, 198), white); */
 	}
 
 	.hdr-container {
@@ -27,18 +26,9 @@
 		justify-content: center;
 	}
 
-	/* .header::before{
-
-	} */
 	.header {
-		/* width: 80%; */
-		/* border: 1px solid black; */
-
 		padding-top: 20px;
 		padding-bottom: 20px;
-		/* margin: auto; */
-		/* text-align: center; */
-		/* font-size: var(--fs-2); */
 		color: var(--clr-btn);
 	}
 </style>

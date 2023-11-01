@@ -170,7 +170,6 @@
 <style>
 	.container {
 		min-height: 100vh;
-		/* background-image: linear-gradient(to right, #e7e3d7, rgb(247, 236, 236)); */
 		background-color: rgb(225, 222, 238, 0.5);
 	}
 
@@ -191,7 +190,6 @@
 
 	.levelbtn {
 		border-radius: 8px;
-		/* font-size: var(--fs-1); */
 		color: orange;
 		background-color: lightcyan;
 	}
@@ -245,12 +243,9 @@
 
 	textarea {
 		color: green;
-		/* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, */
-		/* sans-serif; */
 		font-size: var(--fs-2);
 		min-width: 3ch;
 		padding: 0px 0px;
-		/* resize: none; */
 	}
 
 	.buttonbar {
