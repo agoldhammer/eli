@@ -44,6 +44,7 @@
 
 	onMount(() => {
 		resetWithNewArgs();
+		document.getElementById('ans')?.focus();
 	});
 
 	function correctResponse() {
