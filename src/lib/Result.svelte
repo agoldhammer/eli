@@ -14,6 +14,9 @@
 
 {#if showResult}
 	<div id="result">
+		<div class="snoop">
+			<img src="/snoopy.png" height="80px" alt="Snoopy" />
+		</div>
 		<span id="youare">You are</span>
 		{#if resultCorrect}
 			<div id="right" in:fade|global={{ delay: 250, duration: 1300 }}>RIGHT!</div>
@@ -45,5 +48,19 @@
 	}
 	#wrong {
 		color: red;
+	}
+
+	img {
+		/* width: 300px; */
+		animation: rotation 1s infinite linear;
+	}
+
+	@keyframes rotation {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
 	}
 </style>

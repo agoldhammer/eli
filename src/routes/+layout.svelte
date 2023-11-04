@@ -1,13 +1,13 @@
 <div class="hdr-container">
 	<div class="snoop">
-		<img src="/snoopy.png" height="40px" alt="Snoopy" />
+		<img src="/snoopy.png" height="60px" alt="Snoopy" />
 	</div>
 	<h1 class="header">Eli's Math Practice</h1>
 </div>
 <slot><!-- optional fallback --></slot>
 
 <style>
-	:global(body) {
+	:global(:root) {
 		--clr-btn: #0083ff;
 		--fs-0: 2vw;
 		--fs-1: 3vw;
@@ -21,7 +21,8 @@
 	.hdr-container {
 		display: flex;
 		flex-direction: row;
-		gap: 2em;
+		font-size: var(--fs-1);
+		gap: 6vw;
 		align-items: center;
 		justify-content: center;
 	}
@@ -30,5 +31,10 @@
 		padding-top: 20px;
 		padding-bottom: 20px;
 		color: var(--clr-btn);
+	}
+
+	img:hover {
+		/* transform: rotate(180deg); */
+		rotate: y 180deg;
 	}
 </style>
