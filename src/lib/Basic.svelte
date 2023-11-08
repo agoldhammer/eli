@@ -12,6 +12,7 @@
 	let nCorrect = 0;
 	let nWrong = 0;
 	let MAXARG = writable(10); // maximum argument is set by level controls
+	let LEVEL = writable(1); // level is set by the level control
 
 	// make argument in range 0 to 20
 	function makeArg() {
@@ -19,11 +20,16 @@
 	}
 
 	function makeOp(): Op {
-		const coin = Math.random();
-		if (coin < 0.5) {
+		const level = $LEVEL;
+		if (level === 1) {
 			return '+';
 		} else {
-			return '-';
+			const coin = Math.random();
+			if (coin < 0.5) {
+				return '+';
+			} else {
+				return '-';
+			}
 		}
 	}
 
@@ -146,6 +152,12 @@
 			// console.log('MAXARG', $MAXARG);
 		}
 	}
+
+	function setAddOrSub(event: MouseEvent) {
+		const target = event.target as NonNullable<HTMLInputElement>;
+		const level = parseInt(target.value);
+		LEVEL.set(level);
+	}
 </script>
 
 <div class="container">
@@ -161,6 +173,19 @@
 			<input type="radio" name="levelset" id="medium" class="levelbtn" />
 			<label for="hard">Hard</label>
 			<input type="radio" name="levelset" id="hard" class="levelbtn" />
+		</div>
+		<div class="addorsub">
+			<label for="level">Level</label>
+			<input
+				type="number"
+				id="level"
+				min="1"
+				max="2"
+				step="1"
+				value={$LEVEL}
+				on:click={setAddOrSub}
+			/>
+			<span>1 = + only; 2 = both + and -</span>
 		</div>
 		<!--  -->
 		<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
@@ -203,6 +228,18 @@
 		flex-direction: row;
 		justify-content: center;
 		gap: 1em;
+	}
+
+	.addorsub {
+		width: 60%;
+		margin: auto;
+		font-size: medium;
+		padding: 1em 0em;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 1em;
+		color: var(--clr-btn);
 	}
 
 	label {
