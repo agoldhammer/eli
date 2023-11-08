@@ -12,7 +12,7 @@
 	let nCorrect = 0;
 	let nWrong = 0;
 	let MAXARG = writable(10); // maximum argument is set by level controls
-	let LEVEL = writable(1); // level is set by the level control
+	let LEVEL = writable('+'); // level is set by the level control, can be + or +-
 
 	// make argument in range 0 to 20
 	function makeArg() {
@@ -20,8 +20,9 @@
 	}
 
 	function makeOp(): Op {
+		// level will be either '+' for addition only or '+- for mixed add/sub'
 		const level = $LEVEL;
-		if (level === 1) {
+		if (level === '+') {
 			return '+';
 		} else {
 			const coin = Math.random();
@@ -132,10 +133,20 @@
 		// console.log('set checked btn id', id);
 		const btn = document.getElementById(id) as HTMLInputElement;
 		btn.checked = true;
+
+		// also set add or sub btns
+		const addorsub = $LEVEL;
+		let level_elt: NonNullable<HTMLInputElement>;
+		if (addorsub === '+') {
+			level_elt = document.getElementById('addonly') as HTMLInputElement;
+		} else {
+			level_elt = document.getElementById('subtoo') as HTMLInputElement;
+		}
+		level_elt.checked = true;
 	}
 
 	function setLevel(event: MouseEvent) {
-		let target = event.target as HTMLInputElement;
+		const target = event.target as HTMLInputElement;
 		if (target) {
 			switch (target.id) {
 				case 'easy':
@@ -155,8 +166,13 @@
 
 	function setAddOrSub(event: MouseEvent) {
 		const target = event.target as NonNullable<HTMLInputElement>;
-		const level = parseInt(target.value);
-		LEVEL.set(level);
+		const id = target.id;
+		target.checked = true;
+		if (target.id === 'addonly') {
+			LEVEL.set('+');
+		} else {
+			LEVEL.set('+-');
+		}
 	}
 </script>
 
@@ -174,18 +190,13 @@
 			<label for="hard">Hard</label>
 			<input type="radio" name="levelset" id="hard" class="levelbtn" />
 		</div>
-		<div class="addorsub">
-			<label for="level">Level</label>
-			<input
-				type="number"
-				id="level"
-				min="1"
-				max="2"
-				step="1"
-				value={$LEVEL}
-				on:click={setAddOrSub}
-			/>
-			<span>1 = + only; 2 = both + and -</span>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+		<div class="addorsub" role="group" on:click={setAddOrSub}>
+			<label for="addonly">+ only</label>
+			<input type="radio" id="addonly" />
+			<label for="add or sub">+ or -</label>
+			<input type="radio" id="subtoo" />
 		</div>
 		<!--  -->
 		<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
@@ -233,7 +244,7 @@
 	.addorsub {
 		width: 60%;
 		margin: auto;
-		font-size: medium;
+		font-size: var(--fs-0);
 		padding: 1em 0em;
 		display: flex;
 		flex-direction: row;
