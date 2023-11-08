@@ -4,32 +4,59 @@
 	import { writable } from 'svelte/store';
 	import Result from '$lib/Result.svelte';
 
-	type Args = { arg1: number; arg2: number };
+	type Op = '+' | '-';
+	type Args = { arg1: number; arg2: number; op: Op };
 
 	let showResult = false;
 	let resultCorrect = false;
 	let nCorrect = 0;
 	let nWrong = 0;
 	let MAXARG = writable(10); // maximum argument is set by level controls
+	let LEVEL = writable(1); // level is set by the level control
 
 	// make argument in range 0 to 20
 	function makeArg() {
 		return Math.round($MAXARG * Math.random());
 	}
 
+	function makeOp(): Op {
+		const level = $LEVEL;
+		if (level === 1) {
+			return '+';
+		} else {
+			const coin = Math.random();
+			if (coin < 0.5) {
+				return '+';
+			} else {
+				return '-';
+			}
+		}
+	}
+
 	function newargs() {
-		return { arg1: makeArg(), arg2: makeArg() };
+		return { arg1: makeArg(), arg2: makeArg(), op: makeOp() };
 	}
 
 	let wantedAnswer: number = 0;
 
 	function resetTerms(args: Args) {
+		if (args.op === '-' && args.arg1 < args.arg2) {
+			const temp = args.arg1;
+			args.arg1 = args.arg2;
+			args.arg2 = temp;
+		}
 		const el1 = document.getElementById('arg1') as HTMLDivElement;
+		const op = document.getElementById('op') as HTMLDivElement;
 		const el2 = document.getElementById('arg2') as HTMLDivElement;
 		const ans = document.getElementById('ans') as HTMLTextAreaElement;
 		el1.innerHTML = args.arg1.toString();
+		op.innerHTML = args.op;
 		el2.innerHTML = args.arg2.toString();
-		wantedAnswer = args.arg1 + args.arg2;
+		if (args.op === '+') {
+			wantedAnswer = args.arg1 + args.arg2;
+		} else {
+			wantedAnswer = args.arg1 - args.arg2;
+		}
 		// console.log('args, ans', args.arg1, args.arg2, wantedAnswer);
 		ans.value = '';
 		ans.placeholder = '?';
@@ -125,6 +152,12 @@
 			// console.log('MAXARG', $MAXARG);
 		}
 	}
+
+	function setAddOrSub(event: MouseEvent) {
+		const target = event.target as NonNullable<HTMLInputElement>;
+		const level = parseInt(target.value);
+		LEVEL.set(level);
+	}
 </script>
 
 <div class="container">
@@ -141,6 +174,19 @@
 			<label for="hard">Hard</label>
 			<input type="radio" name="levelset" id="hard" class="levelbtn" />
 		</div>
+		<div class="addorsub">
+			<label for="level">Level</label>
+			<input
+				type="number"
+				id="level"
+				min="1"
+				max="2"
+				step="1"
+				value={$LEVEL}
+				on:click={setAddOrSub}
+			/>
+			<span>1 = + only; 2 = both + and -</span>
+		</div>
 		<!--  -->
 		<div class="score" in:fade|global={{ delay: 100, duration: 1500 }}>
 			<span id="correct">Right: {nCorrect.toString()}</span>
@@ -150,7 +196,7 @@
 		{#key $MAXARG}
 			<div class="problem" use:newProblem in:fade|global={{ delay: 200, duration: 1500 }}>
 				<span id="arg1" class="term1">0</span>
-				<span class="op">+</span>
+				<span id="op" class="op">+</span>
 				<span id="arg2" class="term2">0</span>
 				<span class="eq">=</span>
 				<!-- svelte-ignore a11y-autofocus -->
@@ -182,6 +228,18 @@
 		flex-direction: row;
 		justify-content: center;
 		gap: 1em;
+	}
+
+	.addorsub {
+		width: 60%;
+		margin: auto;
+		font-size: medium;
+		padding: 1em 0em;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 1em;
+		color: var(--clr-btn);
 	}
 
 	label {
